@@ -18,6 +18,7 @@ const Home = () => {
   const [refresh, setRefresh] = useState(false);
   const [attendance, setAttendance] = useState("");
   const [assignment, setAssignment] = useState("");
+  const [students, setStudents] = useState([]);
   const user = JSON.parse(localStorage.getItem("user"));
 
   const token = localStorage.getItem("token");
@@ -122,6 +123,16 @@ const Home = () => {
             toast.success(res.data.message);
             setAttendance(res.data.attendance);
             setAssignment(res.data.assignment);
+          }
+        })
+        .catch((err) => console.log(err));
+    } else {
+      const data = { course: qclass };
+      axios
+        .post("http://localhost:3001/student-report", data)
+        .then((res) => {
+          if (res.data.code === 200) {
+            setStudents(res.data.data);
           }
         })
         .catch((err) => console.log(err));
@@ -248,7 +259,7 @@ const Home = () => {
           onClick={handleClick}
           className="bg-pink text-white text-xl font-semibold rounded-md p-2"
         >
-          Add Information
+          Proceed
         </button>
 
         <button
@@ -272,7 +283,28 @@ const Home = () => {
       >
         See Record
       </button>
-       {user && user.userType === 'student' && <h1 className="text-2xl font-semibold text-white tracking-wide text-center mb-5">Attendance : {attendance}<br/> Assignment : {assignment}</h1>}
+      {user && user.userType === "student" && (
+        <h1 className="text-2xl font-semibold text-white tracking-wide text-center mb-5">
+          Attendance : {attendance}
+          <br /> Assignment : {assignment}
+        </h1>
+      )}
+      {students && students.length > 0 && <div className="flex justify-around text-xl font-semibold text-white">
+        <h1>Roll No.</h1>
+        <h1>Name</h1>
+        <h1>Attendance</h1>
+        <h1>Assignment</h1>
+      </div>}
+      {user &&
+        user.userType === "teacher" &&
+        students.map((student) => {
+          return <div className="flex justify-around text-xl font-semibold text-white">
+            <h1>{student.rollNo}</h1>
+            <h1>{student.username}</h1>
+            <h1>{student.attendance}</h1>
+            <h1>{student.assignment}</h1>
+          </div>
+        })}
     </div>
   );
 };
