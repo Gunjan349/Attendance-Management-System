@@ -2,6 +2,7 @@ import React , {useState}from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
+import API_URL from "../constants";
 
 const ForgotPassword = () => {
   const navigate = useNavigate();
@@ -12,11 +13,11 @@ const ForgotPassword = () => {
     e.preventDefault();
     const data = { email: userEmail };
     axios
-      .post("http://localhost:3001/forgot-password", data)
+      .post(API_URL + "/forgot-password", data)
       .then((res) => {
         if (res.data.code === 200) {
           toast.success("OTP has been sent to Email");
-          navigate("/reset-password");
+          navigate(API_URL + "/reset-password");
         }
         if (res.data.code === 500) {
           toast.error(res.data.message);

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
+import API_URL from "../constants";
 
 const ResetPassword = () => {
   const navigate = useNavigate();
@@ -13,7 +14,7 @@ const ResetPassword = () => {
     e.preventDefault();
     const data = { otp: userOtp, password: password };
     axios
-      .post( "http://localhost:3001/reset-password", data)
+      .post( API_URL + "/reset-password", data)
       .then((res) => {
         console.log(res.data);
         if (res.data.code === 200) {

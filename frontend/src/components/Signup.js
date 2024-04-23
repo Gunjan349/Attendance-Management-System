@@ -3,6 +3,7 @@ import { GiGraduateCap } from "react-icons/gi";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import API_URL from "../constants";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -26,8 +27,8 @@ const Signup = () => {
       password: state.password,
       confirmPassword: state.confirmPassword,
     };
-    axios
-      .post("http://localhost:3001/signup", data)
+    axios 
+      .post(API_URL + "/signup", data)
       .then((res) => {
         console.log(res.data)
         if (res.data.code === 200) {

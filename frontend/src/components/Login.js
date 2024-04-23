@@ -5,6 +5,7 @@ import { FaEyeSlash } from "react-icons/fa";
 import axios from 'axios';
 import {toast} from 'react-toastify';
 import { useNavigate } from "react-router-dom";
+import API_URL from "../constants";
 
 const Login = () => {
 
@@ -18,7 +19,7 @@ const Login = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         const data =  {email: state.email, password: state.password}
-        axios.post('http://localhost:3001/login', data)
+        axios.post(API_URL + '/login', data)
         
         .then(res => {
             if(res.data.code === 200){

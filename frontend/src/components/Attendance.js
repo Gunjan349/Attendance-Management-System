@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
+import API_URL from "../constants";
 
 const Attendance = () => {
   const params = useParams();
@@ -15,7 +16,7 @@ const Attendance = () => {
     const data = { userType: user.userType };
     axios
       .post(
-        "http://localhost:3001/attendance/" +
+        API_URL + "/attendance/" +
           params.course +
           "/" +
           params.subject +
@@ -38,7 +39,7 @@ const Attendance = () => {
     if (attendance) {
       const data = { subject: params.subject, course: params.course, id: id };
       axios
-        .post("http://localhost:3001/attendance", data)
+        .post(API_URL + "/attendance", data)
         .then((res) => {
           console.log(res.data.data);
         })
@@ -50,7 +51,7 @@ const Attendance = () => {
     if (assignment) {
       const data = { subject: params.subject, course: params.course, id: id };
       axios
-        .post("http://localhost:3001/assignment", data)
+        .post(API_URL + "/assignment", data)
         .then((res) => {
           console.log(res.data.data);
         })

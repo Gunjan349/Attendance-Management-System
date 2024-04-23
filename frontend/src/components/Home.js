@@ -3,6 +3,7 @@ import Courses from "./Courses.js";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import API_URL from "../constants.js";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -32,7 +33,7 @@ const Home = () => {
       rollNo: rollNo,
     };
     axios
-      .post("http://localhost:3001/classes", data)
+      .post(API_URL + "/classes", data)
       .then((res) => {
         console.log(res.data);
         if (res.data.code === 200) {
@@ -59,7 +60,7 @@ const Home = () => {
   const addSubject = () => {
     const data = { subject: subject, teacher: user.username };
     axios
-      .post("http://localhost:3001/add-subject", data)
+      .post(API_URL + "/add-subject", data)
       .then((res) => {
         if (res.data.code === 200) {
           toast.success(res.data.message);
@@ -74,7 +75,7 @@ const Home = () => {
       navigate("/login");
     }
     axios
-      .get("http://localhost:3001/get-subjects")
+      .get(API_URL + "/get-subjects")
       .then((res) => {
         if (res.data.code === 200) {
           setData(res.data.data);
@@ -89,7 +90,7 @@ const Home = () => {
     setqsubject([]);
     const data = { userId: user._id };
     axios
-      .post("http://localhost:3001/change", data)
+      .post(API_URL + "/change", data)
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
   };
@@ -101,7 +102,7 @@ const Home = () => {
       subject: qsubject,
     };
     axios
-      .post("http://localhost:3001/update", data)
+      .post(API_URL + "/update", data)
       .then((res) => {
         console.log(res.data);
         if (res.data.code === 200) {
@@ -117,7 +118,7 @@ const Home = () => {
     if (user.userType === "student") {
       const data = { userId: user._id };
       axios
-        .post("http://localhost:3001/report", data)
+        .post(API_URL + "/report", data)
         .then((res) => {
           if (res.data.code === 200) {
             toast.success(res.data.message);
@@ -129,7 +130,7 @@ const Home = () => {
     } else {
       const data = { course: qclass };
       axios
-        .post("http://localhost:3001/student-report", data)
+        .post(API_URL + "/student-report", data)
         .then((res) => {
           if (res.data.code === 200) {
             setStudents(res.data.data);
