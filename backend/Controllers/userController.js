@@ -2,7 +2,6 @@ const User = require("../Models/userModel.js");
 const Role = require("../Models/rolesModel.js");
 const bcryptjs = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const JWT_SECRET = "qsEdJoRD+/bLtZCUnIZgAqBMaYlODiWbE4YDJeQY8+E=";
 const nodemailer = require("nodemailer")
 
 // signup
@@ -84,7 +83,7 @@ module.exports.login = async (req, res) => {
   }
 
   // creating token
-  const token = jwt.sign({ id: user._id }, JWT_SECRET, {
+  const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
     expiresIn: 86400,
   });
   res.send({

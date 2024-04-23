@@ -81,3 +81,24 @@ module.exports.report = async (req, res) => {
     });
   }
 }
+
+module.exports.studentReport = async (req, res) => {
+  const {course} = req.body;
+  const students = await User.find({
+    course: course,
+    userType: "student",
+  });
+  if(students){
+    return res.send({
+      code: 200,
+      message: "Students fetched successfully.",
+      data: students,
+    });
+  }
+  else{
+    return res.send({
+      code: 400,
+      message: "Something went wrong.",
+    });
+  }
+}

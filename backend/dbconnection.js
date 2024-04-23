@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
-mongoose.connect("mongodb+srv://gunjangarg349:0P4UNtu3S1YtQrGL@cluster0.bn1ylnd.mongodb.net/chitchat-db?retryWrites=true&w=majority&appName=Cluster0")
+mongoose.set('strictQuery', false);
+mongoose.connect(process.env.CONNECTION_STRING)
 .then(() => {
     console.log('Connected to MongoDB');
 })
