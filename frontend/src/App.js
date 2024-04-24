@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import {HashRouter, Routes, Route} from 'react-router-dom';
 import Home from './components/Home.js';
 import Login from './components/Login.js';
 import Signup from './components/Signup.js';
@@ -11,16 +11,16 @@ import ResetPassword from './components/ReserPassword.js';
 const App = () => {
   return(
     <div>
-      <BrowserRouter>
+      <HashRouter>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
+          <Route index path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path='/attendance/:course/:subject/:date' element={<Attendance />}/>
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password" element={<ResetPassword />} />
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </div> 
   );
 };
