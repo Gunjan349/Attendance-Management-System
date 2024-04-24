@@ -3,7 +3,7 @@ import Courses from "./Courses.js";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import API_URL from "../constants.js";
+import API_URL from "../constants";
 
 const Home = () => {
   const navigate = useNavigate();
