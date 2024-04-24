@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import {HashRouter, Routes, Route} from 'react-router-dom';
+import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import Home from './components/Home.js';
 import Login from './components/Login.js';
 import Signup from './components/Signup.js';
@@ -11,7 +11,7 @@ import ResetPassword from './components/ReserPassword.js';
 const App = () => {
   return(
     <div>
-      <HashRouter>
+      <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route index path="/login" element={<Login />} />
@@ -20,7 +20,7 @@ const App = () => {
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password" element={<ResetPassword />} />
         </Routes>
-      </HashRouter>
+      </BrowserRouter>
     </div> 
   );
 };

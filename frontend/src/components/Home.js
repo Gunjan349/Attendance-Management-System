@@ -4,6 +4,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import API_URL from "../constants";
+import Logout from "./Logout.js";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -142,12 +143,16 @@ const Home = () => {
 
   return (
     <div className="flex flex-col gap-y-16 pt-10 bg-gradient-to-b from-pink to-blue min-h-screen">
-      <div className="flex justify-center items-center gap-6">
-        <img src={user.profile} className="h-16 w-16" />
-        <h1 className="text-xl font-bold text-violet-400">
-          Welcome {user.username}!!
-        </h1>
+      <div className="flex justify-between mx-12">
+        <div className="flex justify-center items-center gap-6">
+          <img src={user.profile} className="h-16 w-16" />
+          <h1 className="text-xl font-bold text-violet-400">
+            Welcome {user.username}!!
+          </h1>
+        </div>
+        <Logout />
       </div>
+
       <div className="flex justify-around  items-center flex-wrap gap-y-4">
         <details className="dropdown">
           <summary className="m-1 btn bg-blue text-xl font-semibold text-white">
@@ -290,21 +295,25 @@ const Home = () => {
           <br /> Assignment : {assignment}
         </h1>
       )}
-      {students && students.length > 0 && <div className="flex justify-around text-xl font-semibold text-white">
-        <h1>Roll No.</h1>
-        <h1>Name</h1>
-        <h1>Attendance</h1>
-        <h1>Assignment</h1>
-      </div>}
+      {students && students.length > 0 && (
+        <div className="flex justify-around text-xl font-semibold text-white">
+          <h1>Roll No.</h1>
+          <h1>Name</h1>
+          <h1>Attendance</h1>
+          <h1>Assignment</h1>
+        </div>
+      )}
       {user &&
         user.userType === "teacher" &&
         students.map((student) => {
-          return <div className="flex justify-around text-xl font-semibold text-white">
-            <h1>{student.rollNo}</h1>
-            <h1>{student.username}</h1>
-            <h1>{student.attendance}</h1>
-            <h1>{student.assignment}</h1>
-          </div>
+          return (
+            <div className="flex justify-around text-xl font-semibold text-white">
+              <h1>{student.rollNo}</h1>
+              <h1>{student.username}</h1>
+              <h1>{student.attendance}</h1>
+              <h1>{student.assignment}</h1>
+            </div>
+          );
         })}
     </div>
   );
